@@ -19,14 +19,13 @@ import scipy.io
 # %% ------------------------------------------- DATA DIR---------------------------------------------------------------
 DATA_DIR = (str(Path(__file__).parents[1]) + '/data/')
 
+
+# %% ------------------------------------------- DATA LOAD--------------------------------------------------------------
+
 mat = scipy.io.loadmat(str(Path(__file__).parents[1]) + '/data/imdb/imdb.mat')
 print(type(mat))
 print(mat.keys())
 print(mat['imdb'])
-
-for key in mat.keys():
-    if item in mat[key]:
-        print(key)
 
 
 # %% ------------------------------------------- PREPROCESS ------------------------------------------------------------

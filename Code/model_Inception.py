@@ -11,7 +11,7 @@ DATE: September 2020
 import copy
 import os
 import time
-# %% ------------------------------------------- IMPORT PACKAGES -------------------------------------------------------
+# %% ------------------------------------------- Imports ---------------------------------------------------------------
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,26 +20,23 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, models
 from torchvision import transforms
-
+from PIL import ImageFile
 
 # %% ----------------------------------- Hyper Parameters --------------------------------------------------------------
 MODEL_NAME = "inception"
+LR = 0.001
 N_CLASSES = 2
 BATCH_SIZE = 8
 N_EPOCHS = 2
 INPUT_SIZE = 0
 feature_extract = True
 
-# %% ------------------------------------------- DATA DIR---------------------------------------------------------------
+# %% ------------------------------------------- Data Dir --------------------------------------------------------------
 DATA_DIR = (str(Path(__file__).parents[1]) + '/data/data/')
 
-# %% ------------------------------------------- PREPROCESS ------------------------------------------------------------
-from PIL import ImageFile
-
+# %% ------------------------------------------- Data Preparation ------------------------------------------------------
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-# Data augmentation and normalization for training
-# Just normalization for validation
 data_transforms = {
     'train': transforms.Compose([
         transforms.RandomResizedCrop(INPUT_SIZE),
@@ -55,20 +52,18 @@ data_transforms = {
     ]),
 }
 
-print("Initializing Datasets and Dataloaders...")
+print("Initializing Datasets and Data loaders...")
 
-# Create training and validation datasets
 image_datasets = {x: datasets.ImageFolder(os.path.join(DATA_DIR, x), data_transforms[x]) for x in ['train', 'test']}
-# Create training and validation dataloaders
-dataloaders_dict = {x: torch.utils.data.DataLoader(image_datasets[x],
-                                                   batch_size=BATCH_SIZE,
-                                                   shuffle=True, num_workers=4) for x in ['train', 'test']}
+data_loaders_dict = {x: torch.utils.data.DataLoader(image_datasets[x],
+                                                    batch_size=BATCH_SIZE,
+                                                    shuffle=True, num_workers=4) for x in ['train', 'test']}
 
 # Detect if we have a GPU available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-# %% ------------------------------------------- MODEL INCEPTION--------------------------------------------------------
+# %% ------------------------------------------- Inception Model -------------------------------------------------------
 def set_parameter_requires_grad(model, feature_extracting):
     if feature_extracting:
         for param in model.parameters():
@@ -159,7 +154,7 @@ def initialize_model(model_name, num_classes, feature_extract, use_pretrained=Tr
 
     elif model_name == "inception":
         """ Inception v3 
-        Be careful, expects (299,299) sized images and has auxiliary output
+        expects (299,299) sized images and has auxiliary output
         """
         model_ft = models.inception_v3(pretrained=use_pretrained)
         set_parameter_requires_grad(model_ft, feature_extract)
@@ -184,9 +179,9 @@ print(model_ft)
 criterion = nn.CrossEntropyLoss()
 
 params_to_update = model_ft.parameters()
-optimizer_ft = optim.SGD(params_to_update, lr=0.001, momentum=0.9)
+optimizer_ft = optim.SGD(params_to_update, lr=LR, momentum=0.9)
 
-model_ft, hist = train_model(model_ft, dataloaders_dict, criterion, optimizer_ft, num_epochs=N_EPOCHS,
+model_ft, hist = train_model(model_ft, data_loaders_dict, criterion, optimizer_ft, num_epochs=N_EPOCHS,
                              is_inception=(MODEL_NAME == "inception"))
 
 model_ft = model_ft.to(device)
@@ -203,13 +198,13 @@ else:
             print("\t", name)
 
 # %% -------------------------------------- Plot Training --------------------------------------------------------------
-ohist = []
-ohist = [h.cpu().numpy() for h in hist]
+o_hist = []
+o_hist = [h.cpu().numpy() for h in hist]
 
 plt.title("Validation Accuracy vs. Number of Training Epochs")
 plt.xlabel("Training Epochs")
 plt.ylabel("Validation Accuracy")
-plt.plot(range(1, N_EPOCHS + 1), ohist, label="Pretrained")
+plt.plot(range(1, N_EPOCHS + 1), o_hist, label="Pretrained")
 # plt.plot(range(1,num_epochs+1), shist,label="Scratch")
 plt.ylim((0, 1.))
 plt.xticks(np.arange(1, N_EPOCHS + 1, 1.0))
@@ -223,7 +218,7 @@ checkpoint = {
 }
 torch.save(checkpoint, 'gender_inception.pth')
 
-# %% -------------------------------------- Predict--- -----------------------------------------------------------------
+# %% -------------------------------------- Predict --------------------------------------------------------------------
 
 
 # def image_transform(imagepath):

@@ -1,0 +1,16 @@
+Data: 
+https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
+
+Gender Inference with Deep Learning: 
+https://towardsdatascience.com/gender-identification-with-deep-learning-ac379f85a790
+
+What is shap: 
+https://shap.readthedocs.io/en/latest/#:~:text=SHAP%20(SHapley%20Additive%20exPlanations)%20is,papers%20for%20details%20and%20citations.
+
+Difference between AlexNet, VGGNet, ResNet, and Inception:
+https://towardsdatascience.com/the-w3h-of-alexnet-vggnet-resnet-and-inception-7baaaecccc96
+
+
+A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way:
+https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53
+

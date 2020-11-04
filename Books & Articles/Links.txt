@@ -14,3 +14,16 @@ https://towardsdatascience.com/the-w3h-of-alexnet-vggnet-resnet-and-inception-7b
 A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way:
 https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53
 
+
+“Doing machine learning the right way”:
+https://news.mit.edu/2020/aleksander-madry-machine-learning-0308
+
+
+
+The challenges of using machine learning to identify gender in images:
+
+https://www.pewresearch.org/internet/2019/09/05/the-challenges-of-using-machine-learning-to-identify-gender-in-images/
+
+Machine learning: Trends, perspectives, and prospects:
+https://science.sciencemag.org/content/349/6245/255.full
+

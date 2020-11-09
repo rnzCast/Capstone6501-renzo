@@ -10,17 +10,14 @@ from pathlib import Path
 import torch
 from torchvision import models
 from torch import nn
-import torch.nn.functional as F
 
 # %% ------------------------------------------- Hyper Parameters ------------------------------------------------------
 DROPOUT = 0.5
-
 
 # %% ------------------------------------------- CNN Class -------------------------------------------------------------
 class Linear_Model(nn.Module):
     def __init__(self):
         super(Linear_Model, self).__init__()
-        # img = images
         self.fc = nn.Linear(512, 2)
 
     def forward(self, x):
@@ -50,7 +47,6 @@ def load_pretrained_model(name='VGG16'):
             if i == 24:
                 break
             param.requires_grad = False
-
         model.classifier = torch.nn.Sequential(Linear_Model())
 
     elif name == 'Inception':
@@ -59,7 +55,6 @@ def load_pretrained_model(name='VGG16'):
 
         except:
             model = models.inception_v3(pretrained=True, progress=True, aux_logits=False)
-
             torch.save(model, models_path + '/Inception.pth')
         model.fc.out_features = 2
         for i, param in enumerate(model.parameters()):
@@ -73,7 +68,6 @@ def load_pretrained_model(name='VGG16'):
 
         except:
             model = models.resnet18(pretrained=True, progress=True)
-
             torch.save(model, models_path + '/ResNet.pth')
         model.fc.out_features = 2
         for i, param in enumerate(model.parameters()):
@@ -81,5 +75,5 @@ def load_pretrained_model(name='VGG16'):
                 break
             param.requires_grad = False
 
-    print('Model Loaded' + name)
+    print('Model Loaded: ' + name)
     return model

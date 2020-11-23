@@ -25,7 +25,7 @@ LR = 0.001
 N_EPOCHS = 10
 
 # %% ------------------------------------------- Data Dir --------------------------------------------------------------
-DATA_DIR = (str(Path(__file__).parents[1]) + '/data_smile')
+DATA_DIR = (str(Path(__file__).parents[1]) + '/data')
 
 
 # %% ------------------------------------------- Data Preparation ------------------------------------------------------
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                                                                     optimizer=optimizer,
                                                                     train_loader=train_loader,
                                                                     validation_loader=test_loader,
-                                                                    save_path='VGG16_smile.pth',
+                                                                    save_path='VGG16.pth',
                                                                     epochs=N_EPOCHS,
                                                                     lr_scheduler=scheduler)
 

@@ -149,7 +149,7 @@ def function_drive():
                             2, (255, 255, 255), 6)
     big_image = cv2.putText(big_image, "ResNet", ((299 * 3) + 10 + 40, 290), cv2.FONT_HERSHEY_SIMPLEX,
                             2, (255, 255, 255), 6)
-    cv2.imwrite('../image_results/CAM_gender2.jpg', cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
+    cv2.imwrite('../image_results/CAM_gender.jpg', cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
 
 
 function_drive()

@@ -25,7 +25,7 @@ LR = 0.001
 N_EPOCHS = 10
 
 # %% ------------------------------------------- Data Dir --------------------------------------------------------------
-DATA_DIR = (str(Path(__file__).parents[1]) + '/data')
+DATA_DIR = (str(Path(__file__).parents[1]) + '/data_smile')
 
 # %% ------------------------------------------- Data Preparation ------------------------------------------------------
 train_transforms = transforms.Compose([transforms.Resize(300),
@@ -78,6 +78,6 @@ if __name__ == '__main__':
                                                                     optimizer=optimizer,
                                                                     train_loader=train_loader,
                                                                     validation_loader=test_loader,
-                                                                    save_path='ResNet.pth',
+                                                                    save_path='ResNet_smile.pth',
                                                                     epochs=N_EPOCHS,
                                                                     lr_scheduler=scheduler)

@@ -25,7 +25,7 @@ LR = 0.001
 N_EPOCHS = 10
 
 # %% ------------------------------------------- Data Dir --------------------------------------------------------------
-DATA_DIR = (str(Path(__file__).parents[1]) + '/data')
+DATA_DIR = (str(Path(__file__).parents[1]) + '/data_smile')
 
 
 # %% ------------------------------------------- Data Preparation ------------------------------------------------------
@@ -73,7 +73,7 @@ test_loader = DataLoader(test_data,
 
 # %% ------------------------------------------- VGG16 Model -----------------------------------------------------------
 if __name__ == '__main__':
-    model = load_pretrained_model('vgg16')  # channels of images
+    model = load_pretrained_model('VGG16')  # channels of images
     criterion = nn.CrossEntropyLoss()  # defining loss function
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                                                                     optimizer=optimizer,
                                                                     train_loader=train_loader,
                                                                     validation_loader=test_loader,
-                                                                    save_path='VGG16.pth',
+                                                                    save_path='VGG16_smile.pth',
                                                                     epochs=N_EPOCHS,
                                                                     lr_scheduler=scheduler)
 

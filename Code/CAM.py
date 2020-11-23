@@ -17,7 +17,7 @@ device = device("cuda:0" if is_gpu else "cpu")
 import os
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-folder_path = '../val_images/'
+folder_path = '../val_gender/'
 
 
 def returnCAM(feature_conv, weight_softmax, class_idx):
@@ -106,7 +106,7 @@ def makeCAM(model_nm, image_used):
     height, width, _ = img.shape
     print("Creating CAM Image")
     heatmap = cv2.applyColorMap(cv2.resize(CAMs[0], (width, height)), cv2.COLORMAP_JET)
-    result = heatmap * 0.3 + img * 0.5
+    result = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB) * 0.3 + img * 0.5
     return result
 
 
@@ -131,7 +131,7 @@ def function_drive():
             if k < 1:
                 imag = cv2.resize(plt.imread(folder_path + i), (299, 299))
             else:
-                imag = cv2.resize(makeCAM(model_nm = int(k), image_used = image_to_send),
+                imag = cv2.resize(makeCAM(model_nm=int(k), image_used=image_to_send),
                                   (299, 299))
             start_x = (j // 4) * (299 + 5) + 300
             start_y = (j % 4) * (299 + 5)
@@ -149,7 +149,7 @@ def function_drive():
                             2, (255, 255, 255), 6)
     big_image = cv2.putText(big_image, "ResNet", ((299 * 3) + 10 + 40, 290), cv2.FONT_HERSHEY_SIMPLEX,
                             2, (255, 255, 255), 6)
-    cv2.imwrite('../image_results/CAM4.jpeg', cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
+    cv2.imwrite('../image_results/CAM_gender2.jpg', cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
 
 
 function_drive()

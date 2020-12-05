@@ -11,10 +11,10 @@ is_gpu = torch.cuda.is_available()
 DATA_DIR = (str(Path(__file__).parents[1]) + '/data/')
 device = torch.device("cuda:0" if is_gpu else "cpu")
 
-img_name = '1.jpg'
-folder_path = '../val_gender/' + img_name
+img_name = '5.jpg'
+folder_path = '../val_men/' + img_name
 
-model_to_run = 1  # 1 for VGG16, 2 for Inception, 3 for ResNet
+model_to_run = 3  # 1 for VGG16, 2 for Inception, 3 for ResNet
 
 print('Loading Model...')
 
@@ -22,25 +22,13 @@ model = None
 test_transforms = None
 layer = None
 shape = None
-# while True:
-#     inp_user = input('select the model\n\t 1. VGG16\n\t 2. InceptionNet v3\n\t 3. ResNet\n'
-#                      '\nPlease Input: \n')
-#     try:
-#         inp_user = int(inp_user)
-#
-#     except:
-#         continue
-#     if 0 < inp_user < 4:
-#         break
-#     else:
-#         print(' You have Selected Wrong Option.Select Again.\n\n')
 
 inp_user = model_to_run
 if inp_user == 1:
     model = load_model('../models/VGG16.pth')
     layer = model.features[7]
     shape = (224, 224)
-    save_img_name = 'SHAP_VGG16_gender - ' + img_name
+    save_img_name = 'SHAP_VGG16_gender_men - ' + img_name
     test_transforms = transforms.Compose([transforms.Resize(250),
                                           transforms.CenterCrop(224),
                                           transforms.ToTensor(),
@@ -51,7 +39,7 @@ elif inp_user == 2:
     model.dropout = Identity()
     layer = model.Conv2d_4a_3x3.conv
     shape = (299, 299)
-    save_img_name = 'SHAP_Inception_gender - ' + img_name
+    save_img_name = 'SHAP_Inception_gender_men - ' + img_name
     test_transforms = transforms.Compose([transforms.Resize(300),
                                           transforms.CenterCrop(299),
                                           transforms.ToTensor(),
@@ -61,7 +49,7 @@ elif inp_user == 3:
     model = load_model('../models/ResNet.pth')
     layer = model.layer2[0].conv2
     shape = (299, 299)
-    save_img_name = 'SHAP_ResNet_gender - ' + img_name
+    save_img_name = 'SHAP_ResNet_gender_men - ' + img_name
     test_transforms = transforms.Compose([transforms.Resize(300),
                                           transforms.CenterCrop(299),
                                           transforms.ToTensor(),

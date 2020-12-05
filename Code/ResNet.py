@@ -25,7 +25,7 @@ LR = 0.001
 N_EPOCHS = 10
 
 # %% ------------------------------------------- Data Dir --------------------------------------------------------------
-DATA_DIR = (str(Path(__file__).parents[1]) + '/data_smile')
+DATA_DIR = (str(Path(__file__).parents[1]) + '/data')
 
 # %% ------------------------------------------- Data Preparation ------------------------------------------------------
 train_transforms = transforms.Compose([transforms.Resize(300),
@@ -69,6 +69,7 @@ test_loader = DataLoader(test_data,
 # %% ------------------------------------------- ResNet Model -----------------------------------------------------------
 if __name__ == '__main__':
     model = load_pretrained_model('ResNet')  # channels of images
+    print(model)
     criterion = nn.CrossEntropyLoss()  # defining loss function
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
@@ -78,6 +79,6 @@ if __name__ == '__main__':
                                                                     optimizer=optimizer,
                                                                     train_loader=train_loader,
                                                                     validation_loader=test_loader,
-                                                                    save_path='ResNet_smile.pth',
+                                                                    save_path='ResNet.pth',
                                                                     epochs=N_EPOCHS,
                                                                     lr_scheduler=scheduler)

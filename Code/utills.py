@@ -15,7 +15,6 @@ import numpy as np
 is_gpu = torch.cuda.is_available()
 device = torch.device("cuda:0" if is_gpu else "cpu")
 
-
 # %% ------------------------------------------- Prediction ------------------------------------------------------------
 def predict(model, data_loader):
     y_pred = []
@@ -170,12 +169,8 @@ def train(model, criterion, optimizer, train_loader, validation_loader, save_pat
     return history, best_model
 
 # %% ------------------------------------------- Load Model ------------------------------------------------------------
-
 def load_model(model_path):
-    # state_dict = torch.load(model_path)
-    # model.load_state_dict(state_dict)
-    model = torch.load(model_path, map_location=torch.device('cpu')) ## use to run it locally.
+    model = torch.load(model_path, map_location=torch.device('cpu'))  # used to run it locally, no GPU.
     # model = torch.load(model_path)
-
     return model
 

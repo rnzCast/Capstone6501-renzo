@@ -48,11 +48,6 @@ train_data = datasets.ImageFolder(DATA_DIR + '/train', transform=train_transform
 test_data = datasets.ImageFolder(DATA_DIR + '/test', transform=test_transforms)
 print(len(train_data), len(test_data))
 
-"""
-size = len(train_data)
-# split test_data into test and val data
-train_data, test_data = torch.utils.data.random_split(train_data, [math.ceil(size * 0.8), int(size * 0.2)])
-"""
 
 # %% ------------------------------------------- Data Loaders ----------------------------------------------------------
 train_loader = DataLoader(train_data,
@@ -65,11 +60,6 @@ test_loader = DataLoader(test_data,
                          shuffle=True,
                          num_workers=NUM_WORKERS)
 
-
-# validation_loader = DataLoader(validation_data,
-#                                batch_size=TEST_BATCH_SIZE,
-#                                shuffle=True,
-#                                num_workers=NUM_WORKERS)
 
 # %% ------------------------------------------- VGG16 Model -----------------------------------------------------------
 if __name__ == '__main__':

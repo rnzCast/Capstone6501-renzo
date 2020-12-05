@@ -43,7 +43,7 @@ there are multiple steps and instructions to follow in order to run the code.
 The first part is have the data ready to run the pre-trained models. The following steps will guide to
 though the process of downloading the data and prepare it for the training.
 
-    1.1. Download the dataset:
+1.1. Download the dataset:
 [Link to CelebA Dataset](https://drive.google.com/file/d/0B7EVK8r0v71pZjFTYXZWM3FlRnM/view?usp=sharing)
           
 1.2. Unzip the folder and paste it in the directory of the project. The name of this folder should be: 
@@ -112,6 +112,11 @@ NOTE: SHAP only read images with extension `.jpg`.
 **3. RESULTS**
 
 The results for both CAM and SHAP can be found in the folder `image_results`.
+
+
+
+
+
 
 
 

@@ -11,12 +11,15 @@ from torch.cuda import is_available
 from torch import device
 is_gpu = is_available()
 device = device("cuda:0" if is_gpu else "cpu")
-
 import os
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-folder_path = '../val_men/'
+# Folder that contains the image to analyze with CAM
+folder_path = '../val_male/'
 
+
+# Name for the output results. (it will be saved in image_results)
+output_file_name = 'CAM_test.jpg'
 
 def returnCAM(feature_conv, weight_softmax, class_idx):
 
@@ -156,7 +159,7 @@ def function_drive():
                             2, (255, 255, 255), 6)
     big_image = cv2.putText(big_image, "ResNet", ((299 * 3) + 10 + 40, 290), cv2.FONT_HERSHEY_SIMPLEX,
                             2, (255, 255, 255), 6)
-    cv2.imwrite('../image_results/CAM_men.jpg', cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
+    cv2.imwrite('../image_results/' + output_file_name, cv2.cvtColor(big_image, cv2.COLOR_BGR2RGB))
 
 
 function_drive()

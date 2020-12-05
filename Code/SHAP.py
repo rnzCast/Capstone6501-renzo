@@ -11,13 +11,17 @@ is_gpu = torch.cuda.is_available()
 DATA_DIR = (str(Path(__file__).parents[1]) + '/data/')
 device = torch.device("cuda:0" if is_gpu else "cpu")
 
-img_name = '5.jpg'
-folder_path = '../val_men/' + img_name
+# select the folder of the images to be analyze
+folder_name = 'val_male'
 
-model_to_run = 3  # 1 for VGG16, 2 for Inception, 3 for ResNet
+# select the image to be analyze by SHAP
+img_name = '2.jpg'
+
+
+# Select the model to run: 1 for VGG16, 2 for Inception, 3 for ResNet
+model_to_run = 3
 
 print('Loading Model...')
-
 model = None
 test_transforms = None
 layer = None
@@ -28,7 +32,7 @@ if inp_user == 1:
     model = load_model('../models/VGG16.pth')
     layer = model.features[7]
     shape = (224, 224)
-    save_img_name = 'SHAP_VGG16_gender_men - ' + img_name
+    save_img_name = 'SHAP_VGG16_' + folder_name + '_' + img_name
     test_transforms = transforms.Compose([transforms.Resize(250),
                                           transforms.CenterCrop(224),
                                           transforms.ToTensor(),
@@ -39,7 +43,7 @@ elif inp_user == 2:
     model.dropout = Identity()
     layer = model.Conv2d_4a_3x3.conv
     shape = (299, 299)
-    save_img_name = 'SHAP_Inception_gender_men - ' + img_name
+    save_img_name = 'SHAP_Inception_- ' + folder_name + '_' + img_name
     test_transforms = transforms.Compose([transforms.Resize(300),
                                           transforms.CenterCrop(299),
                                           transforms.ToTensor(),
@@ -49,7 +53,7 @@ elif inp_user == 3:
     model = load_model('../models/ResNet.pth')
     layer = model.layer2[0].conv2
     shape = (299, 299)
-    save_img_name = 'SHAP_ResNet_gender_men - ' + img_name
+    save_img_name = 'SHAP_ResNet_' + folder_name + '_' + img_name
     test_transforms = transforms.Compose([transforms.Resize(300),
                                           transforms.CenterCrop(299),
                                           transforms.ToTensor(),
@@ -70,12 +74,12 @@ test_images = next(iter(test_loader))[0]  # .numpy()  # getting only first batch
 print(len(test_images), "Batch of images is selected")
 
 
-X_image = Image.open(folder_path)
+X_image = Image.open('../' + folder_name + '/' + img_name)
 X = test_transforms(X_image)
 X = X.unsqueeze(0)
 
 # image for printing
-img = cv2.imread(folder_path)
+img = cv2.imread('../' + folder_name + '/' + img_name)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 print(img.shape)
 img = cv2.resize(img, shape, 2)
@@ -83,9 +87,9 @@ img = img / 255
 img = np.expand_dims(img, axis=0)
 print(img.shape)
 
-print("Training Gradient Explainer")
+print("Training Gradient Explainer...")
 e_explainer = shap.GradientExplainer((model, layer), test_images.to(device))
-print("Calculating Shap Values of given Images")
+print("Calculating Shap Values of given Images...")
 shap_values, indexes = e_explainer.shap_values(X.to(device), ranked_outputs=2, nsamples=200)
 shap_values = [np.swapaxes(np.swapaxes(s, 2, 3), 1, -1) for s in shap_values]
 
@@ -96,5 +100,4 @@ index_names = np.vectorize(lambda i: classes[i])(indexes.cpu())
 
 shap.image_plot(shap_values, img, index_names, show=False)
 plt.savefig('../image_results/' + save_img_name)
-plt.show()
-print("Image is Saved")
+print('The image ', save_img_name, 'has been Saved!')

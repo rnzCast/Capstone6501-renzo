@@ -27,3 +27,21 @@ https://www.pewresearch.org/internet/2019/09/05/the-challenges-of-using-machine-
 Machine learning: Trends, perspectives, and prospects:
 https://science.sciencemag.org/content/349/6245/255.full
 
+https://github.com/slundberg/shap
+
+
+https://shap.readthedocs.io/en/latest/example_notebooks/gradient_explainer/Multi-input%20Gradient%20Explainer%20MNIST%20Example.html
+
+
+https://blog.fiddler.ai/2019/08/should-you-explain-your-predictions-with-shap-or-ig/
+
+
+https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30
+
+
+http://cvlab.cse.msu.edu/project-interpret-FR
+
+
+Pytorch Tutorial - Fine-tuning:
+https://pytorch.org/tutorials/beginner/finetuning_torchvision_models_tutorial.html
+

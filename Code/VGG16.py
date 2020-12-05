@@ -6,7 +6,6 @@ DATE: September 2020
 """
 
 # %% ------------------------------------------- Imports ---------------------------------------------------------------
-from torch import nn
 from torch import optim
 from torchvision import datasets, transforms
 import warnings

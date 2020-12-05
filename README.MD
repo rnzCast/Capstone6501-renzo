@@ -13,14 +13,14 @@ The scope of this project will be to use three pre-trained models (VG16, Incepti
 to infer gender (male or female) from images, and to interpret the results with Class Activation Maps (CAMs)
 and SHAP.
 
-The data that will be used for this project is the Celeba dataset [1], which contains 200K images of 
+The data that will be used for this project is the CelebA dataset [1], which contains 200K images of 
 celebrities with their corresponding attributes, including gender.
 
 To see the full project paper please  visit:
+[Link to paper](https://github.com/rnzCast/Capstone6501-renzo/blob/master/Deliverables/Final%20Submission%20-%20Journal/Journal%20-%20Renzo%20P.%20Castagnino.docx)
 
-https://github.com/rnzCast/Capstone6501-renzo/blob/master/Deliverables/Final%20Submission%20-%20Journal/Journal%20-%20Renzo%20P.%20Castagnino.docx
-
-The following steps contain the instructions and setup to run the code for this project.
+Considering the complexity of the project, and to the limitations in GitHub to upload the data, 
+there are multiple steps and instructions to follow in order to run the code.
 
 
 **Installation Options**
@@ -38,34 +38,31 @@ The following steps contain the instructions and setup to run the code for this 
 **Configuration and Setup**
 ---
 
-1. The Data
+**1. GETTING THE DATA READY**
 
-There are a few steps in order to have the data ready to be analyze by the model. The first part is
-to ge the data ready. You need to download the images from the Celeba Dataset website, and paste it 
-our repository. All the instructions to ge the data ready for the model are specified below.
+The first part is have the data ready to run the pre-trained models. The following steps will guide to
+though the process of downloading the data and prepare it for the training.
 
-    + Download the images from the Celeba dataset link.
-    
-        - The folder that you need to download is the 'img_align_celeba_png.7z'. don't worry for the .csv file with the labels, you will 
-          find it here in the repo. 
-          https://drive.google.com/drive/folders/0B7EVK8r0v71pTUZsaXdaSnZBZzg
+1.1. Download the dataset:
+[Link to CelebA Dataset](https://drive.google.com/file/d/0B7EVK8r0v71pZjFTYXZWM3FlRnM/view?usp=sharing)
           
-    + Setting up the data in the repository
-        - Unzip the images folder 'img_align_celeba_png' and paste it in the main repository.
-        
-    + Running the 'load_data.py' file to get the data ready for the model.
-        - The 'load_data' file, will read the images and the .csv file, and will separate
-          the images based on the gender label. You need to  create an empty 'data' folder and subfolders
-          as follows:
-            >data
-                >test
-                    >female
-                    >male
-                >train
-                    >female
-                    >male
-              
-          
+1.2. Unzip the folder and paste it in the directory of the project. The name of this folder should be 
+`img_align_celeba`
+
+1.3. create an empty `data` folder as follows:
+![logo](img/data_sample.jpg)
+
+The folder should have `test` and `train` folders, with `female` and `male` each one. It's ok if it is emtpy;
+this will be populated after we run our `load_data.py` file.
+
+1.4. Open and run the file `load_data.py`. This file will read the images from the`img_align_celeba`, 
+will read the .csv file `celeba_list_attr.csv`, and will copy the images accordingly in the `data` folder
+with a train/test split of 80 - 20%. After the process is done, check that the images are properly copied.
+
+1.5. Done! Data is ready to be run for the model.
+
+**2. RUNNING THE PRE-TRAINED MODELS**
+
 
 2. Running the pre-trained models. before running the models, you need to create a folder named
   'models', where all the models will be saved after trained. Also, you need to create an empty

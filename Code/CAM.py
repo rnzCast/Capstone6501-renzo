@@ -6,8 +6,6 @@ import cv2
 from utills import *
 from torch.nn import Identity
 import matplotlib.pyplot as plt
-import os
-import glob
 import numpy as np
 from torch.cuda import is_available
 from torch import device
@@ -41,7 +39,6 @@ def makeCAM(model_nm, image_used):
     def hook_feature(module, input, output):
         features_blobs.append(output.data.cpu().numpy())  # getting output shape of last conv layer
 
-    #print('Loading Model...')
     inp_user = model_nm
     if inp_user == 1:
         model = load_model('../models/VGG16.pth')
@@ -70,7 +67,6 @@ def makeCAM(model_nm, image_used):
                                               transforms.ToTensor(),
                                               transforms.Normalize([0.485, 0.456, 0.406],
                                                                    [0.229, 0.224, 0.225])])
-    #print('Model Loaded')
 
     model.eval()
     model.to(device)
@@ -104,7 +100,6 @@ def makeCAM(model_nm, image_used):
 
     img = image_used
     height, width, _ = img.shape
-    #print("Creating CAM Image")
     heatmap = cv2.applyColorMap(cv2.resize(CAMs[0], (width, height)), cv2.COLORMAP_JET)
     result = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB) * 0.3 + img * 0.5
     return result
@@ -138,8 +133,6 @@ def function_drive():
             elif k == 3:
                 print('image to analyze:', i)
                 print('Model: ResNet')
-
-
 
             image_to_send = plt.imread(folder_path+i)
             if k < 1:

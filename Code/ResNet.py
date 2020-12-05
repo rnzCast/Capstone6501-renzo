@@ -7,11 +7,9 @@ DATE: September 2020
 
 # %% ------------------------------------------- Imports ---------------------------------------------------------------
 from torch.utils.data import DataLoader
-from torch import nn
 from torch import optim
 from torchvision import datasets, transforms
 import warnings
-from pathlib import Path
 from utills import *
 from networks import *
 warnings.filterwarnings("ignore")

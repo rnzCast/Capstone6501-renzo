@@ -16,7 +16,11 @@ and SHAP.
 The data that will be used for this project is the Celeba dataset [1], which contains 200K images of 
 celebrities with their corresponding attributes, including gender.
 
+To see the full project paper please  visit:
 
+https://github.com/rnzCast/Capstone6501-renzo/blob/master/Deliverables/Final%20Submission%20-%20Journal/Journal%20-%20Renzo%20P.%20Castagnino.docx
+
+The following steps contain the instructions and setup to run the code for this project.
 
 
 **Installation Options**
@@ -25,6 +29,9 @@ celebrities with their corresponding attributes, including gender.
 1. Install with [`pip`]
     + `$ pip install shap`
     + `$ pip install path`
+    + `$ pip install torch`
+    + `$ pip install torchvision==0.1.8`
+    
 
 
 

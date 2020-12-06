@@ -19,7 +19,7 @@ img_name = '2.jpg'
 
 
 # Select the model to run: 1 for VGG16, 2 for Inception, 3 for ResNet
-model_to_run = 3
+model_to_run = 1
 
 print('Loading Model...')
 model = None

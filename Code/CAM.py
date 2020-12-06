@@ -19,7 +19,7 @@ folder_path = '../val_male/'
 
 
 # Name for the output results. (it will be saved in image_results)
-output_file_name = 'CAM_test.jpg'
+output_file_name = 'CAM_male1.jpg'
 
 def returnCAM(feature_conv, weight_softmax, class_idx):
 

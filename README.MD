@@ -50,7 +50,11 @@ though the process of downloading the data and prepare it for the training.
 `img_align_celeba`
 
 1.3. create an empty `data` folder as follows:
+
+
 ![logo](img/data_sample.jpg)
+
+
 
 The folder should have `test` and `train` folders, with `female` and `male` each one. It's ok if it is emtpy;
 this will be populated after we run our `load_data.py` file.
